@@ -39,9 +39,10 @@
 .largeButton {
     border-radius: 10px;
     height: 100px;
-    width: 120px;
+    width: 100%;
     font-size: 20px;
     font-weight: bold;
+    align-content: center;
 }
 
 .starRating:not(old){
