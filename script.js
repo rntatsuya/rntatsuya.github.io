@@ -192,7 +192,7 @@ function populateWithViewedTutorials() {
 
     query.descending("createdAt");
     query.containedIn("objectId", tutorials_viewed);
-    mainPageViewedTutorialsDisplayUl.append("<div class='row list-group-item'><h2 class='col-md-12'><b>My Tutorials</b></h2></div>");
+    mainPageViewedTutorialsDisplayUl.append("<div class='row list-group-title'><h2 class='col-md-12'><b>My Tutorials</b></h2></div>");
 
     query.find(
         {
