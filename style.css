@@ -1,3 +1,49 @@
+.backgroundFill {
+    height: 500px;
+    background: #2980b9; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, #77bed5 , #FFFFFF); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #77bed5 , #FFFFFF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+#mainPageSearchDiv {
+    background: #e5ebff;
+    border-style: groove;     
+}
+
+#mainPageMenuDiv {
+    background: #e5ebff;
+    border-style: groove;    
+}
+
+#mainPageClicksLeftDiv {
+    background: #e5ebff;
+    border-style: groove;   
+}
+
+#mainPageLogoutDiv {
+    background: #e5ebff;
+    border-style: groove;  
+}
+
+#additionalButton1 {
+    background: #e5ebff;
+    border-style: groove;     
+}
+
+#additionalButton2 {
+    background: #e5ebff;
+    border-style: groove; 
+}
+
+.largeButton {
+    border-radius: 10px;
+    height: 100px;
+    width: 120px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
 .starRating:not(old){
   display        : inline-block;
   width          : 7.5em;
