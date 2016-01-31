@@ -1,7 +1,5 @@
-﻿<!DOCTYPE html >
+<!DOCTYPE html >
 <html>
-    
-    
     <head>
         <meta charset="utf-8"/>
         <meta name = "viewport" content= "width = device-initial-width, initial-scale = 1"/>
@@ -15,87 +13,104 @@
         <title>Why Pay for College</title>
     </head>
     <body>
+        <div class ="backgroundFill">
         <div class = "container">
             <div class = "page-header text-center">
                 <h1>Why Pay for College</h1>
             </div>
-        </div> 
-        <form id="loginForm" class="form-horizontal login">
-            <div id="loginDiv" class="col-md-6 col-md-offset-3">
-                <div class="form-group" id="usernameLoginInputDiv">
-                    <input id="usernameLoginInput" type="text" placeholder="Username" class="form-control" />
-                </div>
-                <div class="form-group" id="passwordLoginInputDiv">
-                    <input id="passwordLoginInput" type="password" placeholder="Password" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <button type="button" id="loginButton" class="btn btn-primary">Login</button>
-                    <button type="button" id="newAccountButton" class="btn btn-primary pull-right">New Account</button>
-                </div>
             </div>
-        </form>
-        <form id="signupForm" class="form-horizontal signup">
-            <div id="signupDiv" class="col-md-6 col-md-offset-3">
-                <div class="form-group" id="usernameSignupInputDiv">
-                    <input id="usernameSignupInput" type="text" placeholder="Username" class="form-control" />
-                </div>
-                <div class="form-group" id="passwordSignupInputDiv">
-                    <input id="passwordSignupInput" type="password" placeholder="Password" class="form-control" />
-                </div>
-                <div class="form-group" id="passwordConfirmInputDiv">
-                    <input id="passwordConfirmInput" type="password" placeholder="Confirm Password" class="form-control" />
-                </div>
-                <div class="form-group" id="emailInputDiv">
-                    <input id="emailInput" type="email" placeholder="Email" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <button type="button" id="signupButton" class="btn btn-primary">Sign Up</button>
-                    <button type="button" id="backButton" class="btn btn-primary pull-right">Back</button>
-                </div>
-            </div>
-        </form>
-        <div id= "mainPageDiv">
-            <div id="mainPageMenuDiv" class="col-sm-12 well">
-                <button type="button" id="openAddTutorialButton" data-toggle ="modal" data-target="#addTutorialModal" class="btn btn-primary ">Add Tutorial</button>
-                <button type="button" id="logoutButton" class="btn btn-primary pull-right">Logout</button>
-            </div>
-            <div class="col-sm-12">
-                <div id="mainPageSearchDiv" class="col-sm-8 well">
-                    <form class="form-vertical">
-                        <div class="form-group">
-                            <input class="form-control input-lg" id="searchInput" placeholder="What do you want to learn about today?" />
-                        </div>
-                        <div class="form-group">
-                            <label class="checkbox-inline"><input type="checkbox" value="Written Tutorial">Written Tutorial</label>
-                            <label class="checkbox-inline"><input type="checkbox" value="Video Tutorial">Video Tutorial</label>
-                            <label class="checkbox-inline"><input type="checkbox" value="Research Paper">Research Paper</label>
-                            <label class="checkbox-inline"><input type="checkbox" value="University Course">University Course</label>
-                            <button type="button" id="searchButton" class="btn btn-primary pull-right">Search</button>
-                        </div>
-                    </form>
-                </div>
-                <div id="mainPageClicksLeftDiv" class="col-sm-offset-1 col-sm-3 text-center well">
-                    <h4 class="col-sm-12">Clicks Left</h4>
-                    <h3 id="clicksLeftP" class="col-sm-12"></h3>
-                </div>
-            </div>
-            <div class="col-sm-12">
-                <div id="mainPageContentDiv" class="col-sm-8">
-                    <div class="list-group" id="mainPageTutorialsDisplayUl">
+            <form id="loginForm" class="form-horizontal login">
+                <div id="loginDiv" class="col-md-6 col-md-offset-3">
+                    <div class="form-group" id="usernameLoginInputDiv">
+                        <input id="usernameLoginInput" type="text" placeholder="Username" class="form-control" />
+                    </div>
+                    <div class="form-group" id="passwordLoginInputDiv">
+                        <input id="passwordLoginInput" type="password" placeholder="Password" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <button type="button" id="loginButton" class="btn btn-primary">Login</button>
+                        <button type="button" id="newAccountButton" class="btn btn-primary pull-right">New Account</button>
                     </div>
                 </div>
-                <div id="mainPageViewedTutorialsDiv" class="col-sm-offset-1 col-sm-3 text-center">
-                    <div class="list-group" id="mainPageViewedTutorialsDisplayUl">
+            </form>
+            <form id="signupForm" class="form-horizontal signup">
+                <div id="signupDiv" class="col-md-6 col-md-offset-3">
+                    <div class="form-group" id="usernameSignupInputDiv">
+                        <input id="usernameSignupInput" type="text" placeholder="Username" class="form-control" />
+                    </div>
+                    <div class="form-group" id="passwordSignupInputDiv">
+                        <input id="passwordSignupInput" type="password" placeholder="Password" class="form-control" />
+                    </div>
+                    <div class="form-group" id="passwordConfirmInputDiv">
+                        <input id="passwordConfirmInput" type="password" placeholder="Confirm Password" class="form-control" />
+                    </div>
+                    <div class="form-group" id="emailInputDiv">
+                        <input id="emailInput" type="email" placeholder="Email" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <button type="button" id="signupButton" class="btn btn-primary">Sign Up</button>
+                        <button type="button" id="backButton" class="btn btn-primary pull-right">Back</button>
+                    </div>
+                </div>
+            </form>
+            
+            <div id= "mainPageDiv">
+                <div id="mainPageMenuDiv" class="col-sm-12 well">
+                    <button type="button" id="openAddTutorialButton" data-toggle ="modal" data-target="#addTutorialModal" class="btn btn-primary btn-lg col-md-offset-1 ">Add Tutorial</button>
+                    <button type="button" id="openAddTutorialButton" class="btn btn-primary btn-lg col-md-offset-1 ">Viewed Tutorials</button>
+                    <button type="button" id="openAddTutorialButton" class="btn btn-primary btn-lg col-md-offset-1 ">About</button>
+                    <button type="button" id="logoutButton" class="btn btn-primary btn-lg col-md-offset-1 pull-right">Logout</button>
+                </div>
+                <div class="col-sm-12">
+                    <div id="mainPageSearchDiv" class="col-sm-8 well">
+                        <form class="form-vertical">
+                            <div class="row form-group">
+                                <input class="form-control input-lg" id="searchInput" placeholder="What do you want to learn about today?" />
+                            </div>
+                            <div class="row form-group">
+                                <label class="checkbox-inline"><input type="checkbox" id ="writtenTutorialCheckbox" value="Written Tutorial">Written Tutorial</label>
+                                <label class="checkbox-inline"><input type="checkbox" id ="videoTutorialCheckbox" value="Video Tutorial">Video Tutorial</label>
+                                <label class="checkbox-inline"><input type="checkbox" id ="reseachPaperCheckbox" value="Research Paper">Research Paper</label>
+                                <label class="checkbox-inline"><input type="checkbox" id ="universityCourseCheckbox" value="University Course">University Course</label>
+                            </div>
+                            <div class="row form-group">
+                                <div class="form-group col-xs-6">
+                                    <select class ="form-control" id="sortBySelect">
+                                        <option value="0">Relevance</option>
+                                        <option value="1">Quality</option>
+                                        <option value="2">Popularity</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-xs-6">
+                                    <button type="button" id="searchButton" onclick = "populateWithTutorials(true);" class="btn btn-primary pull-right">Search</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="mainPageClicksLeftDiv" class="col-sm-offset-1 col-sm-3 text-center well">
+                        <h4 class="col-sm-12">Clicks Left</h4>
+                        <h3 id="clicksLeftP" class="col-sm-12"></h3>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div id="mainPageContentDiv" class="col-sm-8">
+                        <div class="list-group" id="mainPageTutorialsDisplayUl">
+                        </div>
+                    </div>
+                    <div id="mainPageViewedTutorialsDiv" class="col-sm-offset-1 col-sm-3 text-center">
+                        <div class="list-group" id="mainPageViewedTutorialsDisplayUl">
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
 
         <!--Modals-->
         <div class="modal fade" id="addTutorialModal" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content text-center">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <button type="button" class="close" onclick="clearAddTutorialModal();" data-dismiss="modal">&times;</button>
                         <h3 class="modal-title">Add New Tutorial</h3>
                     </div>
                     <div class="modal-body">
@@ -130,7 +145,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" id="addTutorialButton" class="btn btn-primary" data-dismiss="modal">Add Tutorial</button>
-                        <button type="button" id="closeAddTutorialModalButton" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                        <button type="button" onclick="clearAddTutorialModal();" class="btn btn-primary" data-dismiss="modal">Cancel</button>
                     </div>
                 </div>
             </div>
@@ -140,18 +155,18 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header text-center">
-                        <button type="button" class="close" onclose ="closeAddTutorialModalButton();" data-dismiss="modal">&times;</button>
+                        <button type="button" class="close" onclick="clearShowTutorialModal();" data-dismiss="modal">&times;</button>
                         <h3 id="tutorialTitleModalP" class="modal-title"></h3>
                     </div>
                     <div class="modal-body">
                             <div class="row">
-                                <h4>Type<small class="col-md-offset-1" id="tutorialTypeModalP"></small></h4>
+                                <h4>Type<small class="col-xs-offset-1" id="tutorialTypeModalP"></small></h4>
                             </div>
                             <div class="row">
-                                <h4>Description<small class="col-md-offset-1" id="tutorialDescriptionModalP"></small></h4>
+                                <h4>Description<small class="col-xs-offset-1" id="tutorialDescriptionModalP"></small></h4>
                             </div>
                             <div class="row">
-                                <h4>Link<small class="col-md-offset-1"><a href="" id="tutorialLinkModalP"></a></small></h4>
+                                <h4>Link<small class="col-xs-offset-1"><a href="" id="tutorialLinkModalP"></a></small></h4>
                             </div>
                             <div class="row">
                                 <h4>Tags</h4>
@@ -160,10 +175,10 @@
                                 
                             </div>
                         <div class="row">
-                            <h4>Rating<small class="col-md-offset-1" id="tutorialRatingModalP"></small></h4>
+                            <h4>Rating<small class="col-xs-offset-1" id="tutorialRatingModalP"></small></h4>
                         </div>
                         <div class="row">
-                            <h4>Votes<small class="col-md-offset-1" id="tutorialVotesModalP"></small></h4>
+                            <h4>Votes<small class="col-xs-offset-1" id="tutorialVotesModalP"></small></h4>
                         </div>
                         <div class="row">
                             <h4>Rate the tutorial</h4>
@@ -181,12 +196,13 @@
                                 <input type="radio" name="rating" value="5">
                                 <label id="rating1">1</label>
                             </span>
-                            <h4 class="col-md-offset-1" id="tutorialAlreadyVotedModalP"><small>Already Voted</small></h4>
+                            <h4 class="col-xs-offset-1" id="tutorialAlreadyVotedModalP"><small>Already Voted</small></h4>
                         </div>
+                    </div>
                     <div class="modal-footer">
                         <input type="hidden" id= "tutorialIdModalInput" />
                         <button type="button" id ="voteModalButton" class="btn btn-primary" data-dismiss="modal">Vote</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="clearShowTutorialModal();" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
@@ -194,5 +210,8 @@
 
 
         <script src="script.js"></script>
+        </div>
+        </div>
+        </div>
     </body>
 </html>

@@ -2,6 +2,7 @@ Parse.initialize("EJ3swVy8iVnXKAO6XvT2LhGhYJ4BKLjFqRiuuxyX", "U5KZUB7IOm6JTwhdic
 
 //parse objects
 var Tutorial = Parse.Object.extend("Tutorial");
+var Bonus = Parse.Object.extend("Bonus");
 
 //form handles
 var loginForm = $("#loginForm");
@@ -16,6 +17,11 @@ var mainPageTutorialsDisplayUl = $('#mainPageTutorialsDisplayUl');
 var mainPageViewedTutorialsDisplayUl = $('#mainPageViewedTutorialsDisplayUl');
 
 //modal handles
+var tutorialTitleInput = $('#tutorialTitleInput');
+var tutorialDescriptionTextarea = $('#tutorialDescriptionTextarea');
+var tutorialLinkInput = $('#tutorialLinkInput');
+var tagListDiv = $('#tagListDiv');
+var addTagInput = $('#addTagInput');
 var tutorialTitleModalP = $('#tutorialTitleModalP');
 var tutorialTypeModalP = $('#tutorialTypeModalP');
 var tutorialDescriptionModalP = $('#tutorialDescriptionModalP');
@@ -44,13 +50,14 @@ var addTagButton = $('#addTagButton');
 var addTutorialButton = $('#addTutorialButton');
 var closeAddTutorialModalButton = $('#closeAddTutorialModalButton');
 var logoutButton = $('#logoutButton');
+var searchButton = $('#searchButton');
 
 //display functions
 function displayMainPage() {
     loginForm.addClass("hidden");
     signupForm.addClass("hidden");
     mainPageDiv.removeClass("hidden");
-    populateWithTutorials();
+    populateWithTutorials(false,false);
     populateWithViewedTutorials();
 }
 function displayLoginForm() {
@@ -65,21 +72,117 @@ function displaySignupForm() {
 }
 
 //populate/depopulate stuff
-function populateWithTutorials() {
-    var query = new Parse.Query(Tutorial);
-    query.descending("createdAt");
-    query.find(
-        {
-            success: function (tutorials) {
-                for (var i = 0; i < tutorials.length; i++) {
-                    mainPageTutorialsDisplayUl.append("<div class='row list-group-item' onclick = 'populateModal(this);' id='" + tutorials[i].id + "'><h3 class='col-md-12'>" + tutorials[i].get('title') + "</h3><h3 class='col-md-12'><small>" + tutorials[i].get('rating') + "(" + tutorials[i].get('votes') + " voters)</small></h3></div>");
-                }
-            },
-            error: function (schedules, error) {
+function populateWithTutorials(filter,sortBy) {
+    mainPageTutorialsDisplayUl.empty();
+    if (!filter) {
+        var query = new Parse.Query(Tutorial);
+        query.descending("createdAt");
+        query.find(
+            {
+                success: function (tutorials) {
+                    for (var i = 0; i < tutorials.length; i++) {
+                        mainPageTutorialsDisplayUl.append("<div class='row list-group-item' onclick = 'populateModal(this);' id='" + tutorials[i].id + "'><h3 class='col-md-12'>" + tutorials[i].get('title') + "</h3><h3 class='col-md-12'><small>" + tutorials[i].get('rating') + "(" + tutorials[i].get('votes') + " voters)</small></h3></div>");
+                    }
+                },
+                error: function (tutorials, error) {
 
+                }
             }
+        );
+    }
+    else {
+        var keywords = $('#seachInput').val().split(" ");
+        var writtenTutorial = $('#writtenTutorialCheckbox').is(':checked');
+        var videoTutorial = $('#videoTutorialCheckbox').is(':checked');
+        var researchPaper = $('#researchPaperCheckbox').is(':checked');
+        var universityCourse = $('#universityCourseCheckbox').is(':checked');
+
+        var types = [];
+        var scores = [];
+
+        if (!writtenTutorial && !videoTutorial && !researchPaper && !universityCourse) {
+            types = ["Written Tutorial", "Video Tutorial", "Research Paper", "University Course"];
         }
-    );
+        else {
+            if (writtenTutorial)
+                types.push("Written Tutorial");
+            if (videoTutorial)
+                types.push("Video Tutorial");
+            if (researchPaper)
+                types.push("Research Paper");
+            if (universityCourse)
+                types.push("University Course");
+        }
+
+        var query = new Parse.Query(Tutorial);
+        query.containedIn("type", types);
+
+        query.find(
+            {
+                success: function (tutorials) {
+                    for (var i = 0; i < tutorials.length; i++) {
+                        var score = 0;
+                        var tutorialTitle = tutorials[i].get("title");
+                        var tutorialDescription = tutorials[i].get("description");
+                        var tutorialTags = tutorials[i].get("tags");
+                        var tutorialRating = tutorial[i].get("rating");
+                        var tutorialVoters = tutorials[i].get("voters");
+                        var tutorialId = tutorial[i].id;
+
+                        for (var j = 0; j < keywords.length; j++) {
+                            if (tutorialTitle.indexOf(keywords[j]) >= 0){
+                                if (sortBy == 0)
+                                    score = score + 5;
+                                else if (sortBy == 1)
+                                    score = score + 5 * tutorialRating * tutorialRating;
+                                else
+                                    score = score + 5 * tutorialVoters;
+                            }
+                            if (tutorialDescription.indexOf(keywords[j]) >= 0) {
+                                if (sortBy == 0)
+                                    score = score + 3;
+                                else if (sortBy == 1)
+                                    score = score + 3 * tutorialRating * tutorialRating;
+                                else
+                                    score = score + 3 * tutorialVoters;
+                            }
+                            if ($.inArray(keywords[j], tutorialTags) >= 0) {
+                                if (sortBy == 0)
+                                    score = score + 3;
+                                else if (sortBy == 1)
+                                    score = score + 3 * tutorialRating * tutorialRating;
+                                else
+                                    score = score + 3 * tutorialVoters;
+                            }
+                        }
+                        if (score != 0) {
+                            scores.push([tutorial.id, score]);
+                        }
+                    }
+                },
+                error: function (tutorials, error) {
+
+                }
+            }
+        );
+
+        scores.sort(function (a, b) { return a[1] - b[1] });
+
+        for (var i = 0; i < scores.length; i++) {
+
+            var query = new Parse.Query(Tutorial);
+            query.get(scores[i][0],
+                {
+                    success: function (tutorial) {
+                            mainPageViewedTutorialsDisplayUl.append("<div class='row list-group-item' onclick = 'populateModal(this);' id='" + tutorial.id + "'><h4 class='col-md-12'>" + tutorial.get('title') + "</h4></div>");
+                    },
+                    error: function (tutorial, error) {
+
+                    }
+                }
+            );
+        }
+    }
 }
 function populateWithViewedTutorials() {
 
@@ -89,7 +192,7 @@ function populateWithViewedTutorials() {
 
     query.descending("createdAt");
     query.containedIn("objectId", tutorials_viewed);
-    mainPageViewedTutorialsDisplayUl.append("<div class='row list-group-item'><h2 class='col-md-12'><b>Viewed Tutorials</b></h2></div>");
+    mainPageViewedTutorialsDisplayUl.append("<div class='row list-group-item'><h2 class='col-md-12'><b>My Tutorials</b></h2></div>");
 
     query.find(
         {
@@ -98,7 +201,7 @@ function populateWithViewedTutorials() {
                     mainPageViewedTutorialsDisplayUl.append("<div class='row list-group-item' onclick = 'populateModal(this);' id='" + tutorials[i].id + "'><h4 class='col-md-12'>" + tutorials[i].get('title') + "</h4></div>");
                 }
             },
-            error: function (schedules, error) {
+            error: function (tutorials, error) {
 
             }
         }
@@ -168,7 +271,41 @@ function removeTag(tag) {
 }
 function updateClicksLeft() {
     var currentUser = Parse.User.current();
+    var query = new Parse.Query(Bonus);
+    query.equalTo("username", currentUser.get("username"));
+    query.find({
+            success: function (bonuses) {
+                currentUser.set("clicks_left", bonuses.length * 3 + currentUser.get('clicks_left'));
+                currentUser.save();
+                for (var i = 0; i < bonuses.length; i++) {
+                    bonuses[i].destroy();
+                    bonuses[i].save();
+                }
+            },
+            error: function (bonuses, error) {
+
+            }
+    });
     $('#clicksLeftP').html(currentUser.get("clicks_left"));
+}
+
+function clearAddTutorialModal() {
+    tutorialTitleInput.val('');
+    tutorialDescriptionTextarea.val('');
+    tutorialLinkInput.val('');
+    tagListDiv.empty();
+    addTagInput.val('');
+}
+
+function clearShowTutorialModal() {
+    tutorialTitleModalP.val('');
+    tutorialTypeModalP.val('');
+    tutorialDescriptionModalP.val('');
+    tutorialLinkModalP.val('');
+    tutorialLinkModalP.attr('href','');
+    tutorialTagsModalDiv.empty();
+    tutorialRatingModalP.val('');
+    tutorialVotesModalP.val('');
 }
 
 //button functions
@@ -248,25 +385,20 @@ addTutorialButton.click(function () {
     newTutorial.save(null,
         {
             success: function (tutorial) {
-                populateWithTutorials();
+                populateWithTutorials(false,false);
+                var currentUser = Parse.User.current();
+                currentUser.set("clicks_left", currentUser.get("clicks_left") + 10);
+                currentUser.save();
+
+                updateClicksLeft();
+                clearAddTutorialModal();
             },
             error: function (tutorial, error) {
             }
         }
     );
+
 });
-closeAddTutorialModalButton.click(
-    function () {
-        tutorialTitleInput.val('');
-        tutorialDescriptionTextarea.val('');
-        tutorialLinkInput.val('');
-        tutorialLinkInput.attr("href", "");
-        addTagInput.val('');
-        tutorialRatingModalP.val('');
-        tutorialVotesModalP.val('');
-        tagListDiv.empty();
-    }
-);
 logoutButton.click(
     function () {
         Parse.User.logOut();
@@ -346,6 +478,14 @@ voteModalButton.click(
                    tutorials_voted.push(tutorialIdModalInput.attr("value"));
                    currentUser.set("tutorials_voted", tutorials_voted);
                    currentUser.save();
+
+                   if (rating >= 3) {
+
+                       var newBonus = new Bonus();
+                       newBonus.set("username", tutorial.get("poster"));
+                       newBonus.save();
+
+                   }
 
                },
                error: function (tutorial, error) {
