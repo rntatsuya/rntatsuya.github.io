@@ -6,6 +6,10 @@
 
 }
 
+.title {
+    font-family: lobster;
+}
+
 #mainPageSearchDiv {
     background: #e5ebff;
     border-style: groove;     
